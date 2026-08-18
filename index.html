@@ -92,7 +92,7 @@ header.nav{position:sticky;top:0;z-index:80;background:rgba(250,240,227,.94);bac
 .hero::after{content:"";position:absolute;z-index:-1;width:min(760px,120%);aspect-ratio:1;right:-18%;top:-32%;border-radius:50%;background:radial-gradient(circle,rgba(196,137,122,.55) 0%,rgba(196,137,122,0) 68%)}
 .hero .wrap{display:grid;grid-template-columns:1fr;gap:clamp(32px,4vw,54px);align-items:center}
 @media(min-width:960px){.hero .wrap{grid-template-columns:1.06fr .94fr}}
-.hero h1{color:var(--crema);max-width:14ch}
+.hero h1{color:var(--crema);max-width:15ch}
 .hero .hero-script{color:#EDC5B6;font-size:clamp(38px,7.2vw,72px);display:block;margin-top:.02em}
 .hero .sub{color:var(--crema);opacity:.9;max-width:44ch}
 .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
@@ -102,14 +102,38 @@ header.nav{position:sticky;top:0;z-index:80;background:rgba(250,240,227,.94);bac
 .hero-trust span{display:flex;align-items:center;gap:7px}
 .hero-trust span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--coral);flex-shrink:0}
 .hero-collage{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.hero-collage img{width:100%;height:100%;object-fit:cover;border-radius:14px;box-shadow:0 22px 46px -22px rgba(0,0,0,.75);aspect-ratio:3/4}
-.hero-collage img:nth-child(1){grid-row:span 2;aspect-ratio:3/5}
-.hero-collage img:nth-child(4){grid-column:span 2;aspect-ratio:2/1}
+.hero-collage>*{margin:0;position:relative;overflow:hidden;border-radius:14px;box-shadow:0 22px 46px -22px rgba(0,0,0,.75);aspect-ratio:3/4}
+.hero-collage img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-collage>*:nth-child(1){grid-row:span 2;aspect-ratio:3/5}
+.hero-collage>*:nth-child(4){grid-column:span 2;aspect-ratio:2/1}
+.hc-team{outline:2px solid rgba(255,90,54,.75);outline-offset:-2px}
+.hc-team figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 12px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--crema);background:linear-gradient(transparent,rgba(43,23,16,.9));display:flex;align-items:center;gap:8px}
+.hc-team figcaption::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--coral);flex-shrink:0}
 @media(max-width:560px){
   .hero-collage{grid-template-columns:repeat(2,1fr);gap:9px}
-  .hero-collage img:nth-child(1){grid-row:auto;aspect-ratio:3/4}
-  .hero-collage img:nth-child(4){grid-column:span 2;aspect-ratio:16/9}
+  .hero-collage>*:nth-child(1){grid-row:auto;aspect-ratio:3/4}
+  .hero-collage>*:nth-child(4){grid-column:span 2;aspect-ratio:16/9}
+  /* put a face first on phones, where the collage sits below the CTA */
+  .hc-team{order:-1}
+  /* drop the fourth tile on phones so the grid stays even, no orphan cell
+     and no awkward landscape crop of a portrait photo */
+  .hero-collage>*:nth-child(3){display:none}
 }
+
+/* ============ FREE RESOURCES ============ */
+.res-band{background:var(--card);border-bottom:1px solid var(--line);padding-top:clamp(44px,5vw,74px);padding-bottom:clamp(44px,5vw,74px)}
+.res-band .sec-head .badge{margin-bottom:14px}
+.res-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:38px}
+@media(min-width:760px){.res-grid{grid-template-columns:repeat(3,1fr)}}
+.res-card{background:var(--crema);border:1px solid var(--line);border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;position:relative;transition:transform .2s,box-shadow .25s,border-color .2s}
+.res-card:hover{transform:translateY(-3px);box-shadow:0 24px 44px -30px rgba(122,53,32,.55);border-color:var(--coral)}
+.res-card .rc-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.res-card .rc-n{font-family:'Playfair Display',serif;font-weight:800;font-size:12px;letter-spacing:.14em;color:var(--coral)}
+.res-card .rc-tag{position:absolute;top:22px;right:20px;font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--mauve);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:var(--card)}
+.res-card h3{font-size:19px;color:var(--terra);margin-top:10px;letter-spacing:-.01em;max-width:14ch}
+.res-card p{font-size:13.5px;color:var(--terra-ink);margin-top:10px;line-height:1.55;flex:1}
+.res-card .rc-btn{margin-top:20px;width:100%;font-size:13.5px;padding:13px 20px;min-height:46px}
+.res-note{margin-top:26px;font-size:12.5px;color:var(--muted);text-align:center}
 
 /* ============ SERVICES ============ */
 .svc-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:38px}
@@ -138,6 +162,9 @@ header.nav{position:sticky;top:0;z-index:80;background:rgba(250,240,227,.94);bac
 @media(min-width:900px){.ba{grid-template-columns:1.05fr .95fr;gap:44px}}
 .ba-copy h3{font-size:clamp(22px,2.6vw,30px);color:var(--crema);margin-top:14px;letter-spacing:-.01em}
 .ba-copy p{font-size:14.5px;color:var(--crema);opacity:.68;margin-top:12px;line-height:1.6;max-width:46ch}
+.ba-points{list-style:none;margin:20px 0 0;display:grid;gap:9px}
+.ba-points li{position:relative;padding-left:22px;font-size:13.5px;color:var(--crema);opacity:.8;line-height:1.5}
+.ba-points li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--coral)}
 .ba-img{margin:0 auto;position:relative;border-radius:18px;overflow:hidden;background:rgba(250,240,227,.05);border:1px solid var(--line-d);cursor:zoom-in;max-width:460px;width:100%}
 .ba-img img{width:100%;display:block}
 .ba-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 11px;font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--crema);background:linear-gradient(transparent,rgba(43,23,16,.85))}
@@ -148,8 +175,7 @@ header.nav{position:sticky;top:0;z-index:80;background:rgba(250,240,227,.94);bac
 .proof .eyebrow{color:var(--crema);opacity:.82}
 .proof .sub{color:var(--crema);opacity:.92}
 .reel-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:36px}
-@media(min-width:680px){.reel-row{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1040px){.reel-row{grid-template-columns:repeat(5,1fr)}}
+@media(min-width:680px){.reel-row{grid-template-columns:repeat(4,1fr)}}
 .reel{position:relative;border-radius:16px;overflow:hidden;background:rgba(43,23,16,.3);box-shadow:0 20px 44px -26px rgba(43,23,16,.9)}
 .reel video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;cursor:pointer;background:var(--ink)}
 .reel .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:rgba(250,240,227,.92);display:grid;place-items:center;pointer-events:none;z-index:2;transition:opacity .2s,transform .2s;box-shadow:0 8px 20px -8px rgba(0,0,0,.6)}
@@ -284,6 +310,7 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
       <span class="st">studio T</span><span class="cr">creative</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="#resources">Free tools</a>
       <a href="#services">Services</a>
       <a href="#work">Work</a>
       <a href="#team">Studio</a>
@@ -305,13 +332,12 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
         <span class="badge badge-ghost">Bilingual EN / ES</span>
         <span class="badge badge-coral">Now booking</span>
       </div>
-      <h1>Brand it.<br>Shoot it.
-        <span class="hero-script">Grow it.</span>
+      <h1>Become the brand
+        <span class="hero-script">they choose.</span>
       </h1>
       <p class="sub">Studio T Creative builds your brand, produces your content and runs the campaigns behind it. One studio, one team, one clear plan.</p>
       <div class="hero-actions">
         <a href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce" target="_blank" rel="noopener" class="btn btn-coral">Take Next Step <span class="arw" aria-hidden="true">→</span></a>
-        <a href="#schedule" class="btn btn-line-d">Book a 15 min call</a>
       </div>
       <div class="hero-trust">
         <span>50+ brands grown</span>
@@ -320,11 +346,54 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
       </div>
     </div>
     <div class="hero-collage">
-      <img data-lb src="assets/opt/poke_45.jpg" alt="Food brand photography for a Tampa Bay restaurant" width="600" height="1000" loading="eager" decoding="async">
-      <img data-lb src="assets/opt/story_1.jpg" alt="Branded social content design" width="600" height="800" loading="eager" decoding="async">
-      <img data-lb src="assets/opt/mane_consult.jpg" alt="Medical brand content, patient consultation" width="600" height="800" loading="eager" decoding="async">
-      <img data-lb src="assets/opt/weber_shoot3.jpg" alt="Creative direction on a product shoot" width="1200" height="600" loading="lazy" decoding="async">
+      <img data-lb src="assets/poke-company/poke_45.jpg" alt="Food brand photography for a Tampa Bay restaurant" width="600" height="1000" loading="eager" decoding="async">
+      <img data-lb src="assets/stories/story_1.jpg" alt="Branded social content design" width="600" height="800" loading="eager" decoding="async">
+      <img data-lb src="assets/american-mane/mane_consult.jpg" alt="Medical brand content, patient consultation" width="600" height="800" loading="eager" decoding="async">
+      <figure class="hc-team" data-lb>
+        <img src="assets/studio-t/team_group.jpg" alt="The Studio T Creative team working together in the studio" width="1200" height="600" loading="eager" decoding="async">
+        <figcaption>The team you will work with</figcaption>
+      </figure>
     </div>
+  </div>
+</section>
+
+<!-- ============ FREE RESOURCES ============ -->
+<!-- To change where the opt in goes, replace every RESOURCES_FORM_URL occurrence below.
+     Set that HoneyBook form's redirect URL to /resources so people land on the unlock page. -->
+<section class="res-band" id="resources">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <p class="eyebrow">Free Resources</p>
+      <h2>Three tools. Take the one you need.</h2>
+      <div class="rule center"></div>
+      <p class="sub">These are practical tools designed to help business owners and marketing teams elevate their brand presence, improve online performance, and stay ahead of trends.</p>
+    </div>
+
+    <div class="res-grid">
+      <article class="res-card reveal">
+        <span class="rc-n">01</span>
+        <span class="rc-tag">Toolkit</span>
+        <h3>AI Skill Toolkit</h3>
+        <p>Our internal AI setup, packaged. The prompts and workflows we actually use to plan campaigns and produce content faster.</p>
+        <a class="btn btn-coral rc-btn" data-res="toolkit" href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce">Send me this <span class="arw" aria-hidden="true">&rarr;</span></a>
+      </article>
+      <article class="res-card reveal">
+        <span class="rc-n">02</span>
+        <span class="rc-tag">PDF plan</span>
+        <h3>30 Day Content Plan</h3>
+        <p>A full month mapped out. What to post, on which day and why, so you never open the app wondering what to say.</p>
+        <a class="btn btn-coral rc-btn" data-res="plan" href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce">Send me this <span class="arw" aria-hidden="true">&rarr;</span></a>
+      </article>
+      <article class="res-card reveal">
+        <span class="rc-n">03</span>
+        <span class="rc-tag">PDF pack</span>
+        <h3>Image Prompt Pack</h3>
+        <p>Ready to paste prompts for on brand product and lifestyle images, with the wording that makes the difference.</p>
+        <a class="btn btn-coral rc-btn" data-res="prompts" href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce">Send me this <span class="arw" aria-hidden="true">&rarr;</span></a>
+      </article>
+    </div>
+
+    <p class="res-note reveal">One at a time, so you actually use it. Name and email only, no spam, unsubscribe in one click.</p>
   </div>
 </section>
 
@@ -409,9 +478,14 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
         <span class="badge badge-coral">See the difference</span>
         <h3>What a content system does to a feed.</h3>
         <p>Same brand, same budget, different plan. Consistent art direction, a real calendar and content built around monthly priorities instead of whatever there was time for.</p>
+        <ul class="ba-points">
+          <li>One look across every post</li>
+          <li>Planned campaigns, not last minute posts</li>
+          <li>Photo, video and design from one team</li>
+        </ul>
       </div>
       <figure class="ba-img">
-        <img data-lb src="assets/opt/feed_evolution_phones.jpg" alt="A client Instagram feed before and after Studio T, shown side by side on two phones" loading="lazy" decoding="async">
+        <img data-lb src="assets/feed/bavaro-pizza.jpg" alt="A client Instagram feed before and after Studio T, shown side by side on two phones" loading="lazy" decoding="async">
         <figcaption>Client feed, before and after</figcaption>
       </figure>
     </div>
@@ -431,105 +505,113 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
     <div class="reel-row">
       <div class="reel reveal">
         <span class="play" aria-hidden="true"></span>
-        <video src="assets/opt/reel_mane.mp4" poster="assets/opt/reel_mane_poster.jpg" playsinline preload="none" muted loop aria-label="American Mane reel"></video>
+        <video src="assets/american-mane/reel_mane.mp4" poster="assets/american-mane/reel_mane_poster.jpg" playsinline preload="none" muted loop aria-label="American Mane reel"></video>
         <div class="rname">American Mane <i>Medical</i></div>
       </div>
       <div class="reel reveal">
         <span class="play" aria-hidden="true"></span>
-        <video src="assets/opt/reel_mane2.mp4" poster="assets/opt/reel_mane2_poster.jpg" playsinline preload="none" muted loop aria-label="American Mane reel"></video>
+        <video src="assets/american-mane/reel_mane2.mp4" poster="assets/american-mane/reel_mane2_poster.jpg" playsinline preload="none" muted loop aria-label="American Mane reel"></video>
         <div class="rname">American Mane <i>Medical</i></div>
       </div>
       <div class="reel reveal">
         <span class="play" aria-hidden="true"></span>
-        <video src="assets/opt/mane_reel.mp4" poster="assets/opt/mane_poster.jpg" playsinline preload="none" muted loop aria-label="American Mane reel"></video>
+        <video src="assets/american-mane/reel_mane_prp.mp4" poster="assets/american-mane/reel_mane_prp_poster.jpg" playsinline preload="none" muted loop aria-label="American Mane reel"></video>
         <div class="rname">American Mane <i>Medical</i></div>
       </div>
       <div class="reel reveal">
         <span class="play" aria-hidden="true"></span>
-        <video src="assets/opt/reel_busybod.mp4" poster="assets/opt/reel_busybod_poster.jpg" playsinline preload="none" muted loop aria-label="Busy Bod reel"></video>
+        <video src="assets/busy-bod/reel_busybod.mp4" poster="assets/busy-bod/reel_busybod_poster.jpg" playsinline preload="none" muted loop aria-label="Busy Bod reel"></video>
         <div class="rname">Busy Bod <i>Wellness</i></div>
       </div>
       <div class="reel reveal">
         <span class="play" aria-hidden="true"></span>
-        <video src="assets/opt/reel_busybod2.mp4" poster="assets/opt/reel_busybod2_poster.jpg" playsinline preload="none" muted loop aria-label="Busy Bod reel"></video>
+        <video src="assets/busy-bod/reel_busybod2.mp4" poster="assets/busy-bod/reel_busybod2_poster.jpg" playsinline preload="none" muted loop aria-label="Busy Bod reel"></video>
         <div class="rname">Busy Bod <i>Wellness</i></div>
+      </div>
+      <div class="reel reveal">
+        <span class="play" aria-hidden="true"></span>
+        <video src="assets/busy-bod/reel_busybod3.mp4" poster="assets/busy-bod/reel_busybod3_poster.jpg" playsinline preload="none" muted loop aria-label="Busy Bod reel"></video>
+        <div class="rname">Busy Bod <i>Wellness</i></div>
+      </div>
+      <div class="reel reveal">
+        <span class="play" aria-hidden="true"></span>
+        <video src="assets/candy-cream/reel_candycream.mp4" poster="assets/candy-cream/reel_candycream_poster.jpg" playsinline preload="none" muted loop aria-label="Candy Cream reel"></video>
+        <div class="rname">Candy Cream <i>Dessert</i></div>
+      </div>
+      <div class="reel reveal">
+        <span class="play" aria-hidden="true"></span>
+        <video src="assets/candy-cream/reel_candycream2.mp4" poster="assets/candy-cream/reel_candycream2_poster.jpg" playsinline preload="none" muted loop aria-label="Candy Cream reel"></video>
+        <div class="rname">Candy Cream <i>Dessert</i></div>
       </div>
     </div>
     <p class="proof-hint">Tap to play · Sound on</p>
 
     <div class="ind-nav" role="tablist" aria-label="Work by industry">
-      <button class="ind-btn" role="tab" id="tab-food" aria-controls="p-food" aria-selected="true" data-p="food">Food &amp; Hospitality</button>
+      <button class="ind-btn" role="tab" id="tab-food" aria-controls="p-food" aria-selected="true" data-p="food">Food &amp; Drink</button>
+      <button class="ind-btn" role="tab" id="tab-dessert" aria-controls="p-dessert" aria-selected="false" data-p="dessert">Dessert &amp; Caf&eacute;</button>
       <button class="ind-btn" role="tab" id="tab-medical" aria-controls="p-medical" aria-selected="false" data-p="medical">Medical</button>
-      <button class="ind-btn" role="tab" id="tab-wellness" aria-controls="p-wellness" aria-selected="false" data-p="wellness">Wellness</button>
-      <button class="ind-btn" role="tab" id="tab-retail" aria-controls="p-retail" aria-selected="false" data-p="retail">Retail &amp; Product</button>
+      <button class="ind-btn" role="tab" id="tab-wellness" aria-controls="p-wellness" aria-selected="false" data-p="wellness">Wellness &amp; Product</button>
       <button class="ind-btn" role="tab" id="tab-brand" aria-controls="p-brand" aria-selected="false" data-p="brand">Brand &amp; Web</button>
     </div>
 
     <div class="ind-panel on" id="p-food" role="tabpanel" aria-labelledby="tab-food">
       <div class="gallery">
-        <figure data-lb><img src="assets/opt/poke_45.jpg" alt="Poke Company food photography" loading="lazy" decoding="async"><figcaption>Food photography</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_124.jpg" alt="Poke Company storefront content" loading="lazy" decoding="async"><figcaption>Storefront</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_46.jpg" alt="Poke Company campaign carousel cover" loading="lazy" decoding="async"><figcaption>Campaign hook</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_54.jpg" alt="Poke Company educational carousel" loading="lazy" decoding="async"><figcaption>Educational</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_51.jpg" alt="Poke Company editorial carousel" loading="lazy" decoding="async"><figcaption>Carousel design</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_36.jpg" alt="Poke Company product feature" loading="lazy" decoding="async"><figcaption>Product feature</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_41.jpg" alt="Poke Company menu content" loading="lazy" decoding="async"><figcaption>Menu content</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_115.jpg" alt="Poke Company behind the counter" loading="lazy" decoding="async"><figcaption>Behind the scenes</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_52.jpg" alt="Poke Company educational carousel" loading="lazy" decoding="async"><figcaption>Carousel design</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_53.jpg" alt="Poke Company campaign design" loading="lazy" decoding="async"><figcaption>Campaign</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_tacos.jpg" alt="Overhead taco flatlay food photography" loading="lazy" decoding="async"><figcaption>Flatlay direction</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_food_grid.jpg" alt="Restaurant menu photography grid" loading="lazy" decoding="async"><figcaption>Menu grid</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_food_styling.jpg" alt="Plated food styling for a restaurant menu" loading="lazy" decoding="async"><figcaption>Food styling</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_cocktail.jpg" alt="Cocktail photography on a dark set" loading="lazy" decoding="async"><figcaption>Beverage</figcaption></figure>
-        <figure data-lb><img src="assets/opt/muddy_barista.jpg" alt="Barista pulling espresso, coffee shop brand content" loading="lazy" decoding="async"><figcaption>On location</figcaption></figure>
-        <figure data-lb><img src="assets/opt/muddy_coffee.jpg" alt="Iced coffee cup, coffee shop brand content" loading="lazy" decoding="async"><figcaption>Product</figcaption></figure>
-        <figure data-lb><img src="assets/opt/muddy_pastries.jpg" alt="Pastry photography for a cafe" loading="lazy" decoding="async"><figcaption>Bakery</figcaption></figure>
-        <figure data-lb><img src="assets/opt/muddy_lounge.jpg" alt="Guests in a cafe lounge, hospitality lifestyle content" loading="lazy" decoding="async"><figcaption>Hospitality</figcaption></figure>
+        <figure data-lb><img src="assets/poke-company/poke_45.jpg" alt="Poke Company food photography" loading="lazy" decoding="async"><figcaption>Food photography</figcaption></figure>
+        <figure data-lb><img src="assets/poke-company/poke_124.jpg" alt="Poke Company storefront content" loading="lazy" decoding="async"><figcaption>Storefront</figcaption></figure>
+        <figure data-lb><img src="assets/poke-company/poke_46.jpg" alt="Poke Company campaign carousel cover" loading="lazy" decoding="async"><figcaption>Campaign hook</figcaption></figure>
+        <figure data-lb><img src="assets/food-cocktail/work_tacos.jpg" alt="Overhead taco flatlay food photography" loading="lazy" decoding="async"><figcaption>Flatlay direction</figcaption></figure>
+        <figure data-lb><img src="assets/food-cocktail/work_food_grid.jpg" alt="Restaurant menu photography grid" loading="lazy" decoding="async"><figcaption>Menu grid</figcaption></figure>
+        <figure data-lb><img src="assets/food-cocktail/work_cocktail.jpg" alt="Cocktail photography on a dark set" loading="lazy" decoding="async"><figcaption>Beverage</figcaption></figure>
+        <figure data-lb><img src="assets/happy-fish/happyfish_1.jpg" alt="Happy Fish plated dishes presented by staff" loading="lazy" decoding="async"><figcaption>Service</figcaption></figure>
+        <figure data-lb><img src="assets/happy-fish/happyfish_2.jpg" alt="Happy Fish signature plate, overhead" loading="lazy" decoding="async"><figcaption>Signature plate</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="ind-panel" id="p-dessert" role="tabpanel" aria-labelledby="tab-dessert" hidden>
+      <div class="gallery">
+        <figure data-lb><img src="assets/candy-cream/cc_4-copy.jpg" alt="Candy Cream storefront with customers" loading="lazy" decoding="async"><figcaption>Storefront</figcaption></figure>
+        <figure data-lb><img src="assets/candy-cream/cc_moms-favorite.jpg" alt="Candy Cream sundae with toppings called out" loading="lazy" decoding="async"><figcaption>Menu feature</figcaption></figure>
+        <figure data-lb><img src="assets/candy-cream/cc_4.jpg" alt="Candy Cream hot fudge brownie campaign graphic" loading="lazy" decoding="async"><figcaption>Campaign</figcaption></figure>
+        <figure data-lb><img src="assets/candy-cream/cc_55.jpg" alt="Candy Cream buy one get one promotion graphic" loading="lazy" decoding="async"><figcaption>Promotion</figcaption></figure>
+        <figure data-lb><img src="assets/candy-cream/cc_texture-2.jpg" alt="Candy Cream ice cream texture close up" loading="lazy" decoding="async"><figcaption>Texture</figcaption></figure>
+        <figure data-lb><img src="assets/moody-root/moodyroot_barista.jpg" alt="Barista pulling espresso, coffee shop brand content" loading="lazy" decoding="async"><figcaption>On location</figcaption></figure>
+        <figure data-lb><img src="assets/moody-root/moodyroot_coffee.jpg" alt="Iced coffee cup, coffee shop brand content" loading="lazy" decoding="async"><figcaption>Product</figcaption></figure>
+        <figure data-lb><img src="assets/moody-root/moodyroot_lounge.jpg" alt="Guests in a cafe lounge, hospitality lifestyle content" loading="lazy" decoding="async"><figcaption>Hospitality</figcaption></figure>
       </div>
     </div>
 
     <div class="ind-panel" id="p-medical" role="tabpanel" aria-labelledby="tab-medical" hidden>
       <div class="gallery">
-        <figure data-lb><img src="assets/opt/mane_consult.jpg" alt="American Mane patient consultation" loading="lazy" decoding="async"><figcaption>Consultation</figcaption></figure>
-        <figure data-lb><img src="assets/opt/mane_surgery.jpg" alt="American Mane procedure documentation" loading="lazy" decoding="async"><figcaption>Procedure</figcaption></figure>
-        <figure data-lb><img src="assets/opt/mane_photo.jpg" alt="American Mane clinical preparation detail" loading="lazy" decoding="async"><figcaption>Clinical detail</figcaption></figure>
-        <figure data-lb><img src="assets/opt/mane_grafts.jpg" alt="American Mane results content" loading="lazy" decoding="async"><figcaption>Results</figcaption></figure>
-        <figure data-lb><img src="assets/opt/mane_poster.jpg" alt="American Mane video still" loading="lazy" decoding="async"><figcaption>Video still</figcaption></figure>
+        <figure data-lb><img src="assets/american-mane/mane_consult.jpg" alt="American Mane patient consultation" loading="lazy" decoding="async"><figcaption>Consultation</figcaption></figure>
+        <figure data-lb><img src="assets/american-mane/mane_surgery.jpg" alt="American Mane procedure documentation" loading="lazy" decoding="async"><figcaption>Procedure</figcaption></figure>
+        <figure data-lb><img src="assets/american-mane/mane_photo.jpg" alt="American Mane clinical preparation detail" loading="lazy" decoding="async"><figcaption>Clinical detail</figcaption></figure>
+        <figure data-lb><img src="assets/american-mane/mane_grafts.jpg" alt="American Mane results content" loading="lazy" decoding="async"><figcaption>Results</figcaption></figure>
+        <figure data-lb><img src="assets/american-mane/mane_poster.jpg" alt="American Mane video still" loading="lazy" decoding="async"><figcaption>Video still</figcaption></figure>
       </div>
     </div>
 
     <div class="ind-panel" id="p-wellness" role="tabpanel" aria-labelledby="tab-wellness" hidden>
       <div class="gallery">
-        <figure data-lb><img src="assets/opt/reel_busybod_poster.jpg" alt="Busy Bod wellness reel still" loading="lazy" decoding="async"><figcaption>Reel still</figcaption></figure>
-        <figure data-lb><img src="assets/opt/reel_busybod2_poster.jpg" alt="Busy Bod wellness content" loading="lazy" decoding="async"><figcaption>Reel still</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_2.jpg" alt="Wellness campaign hook design" loading="lazy" decoding="async"><figcaption>Campaign hook</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_18.jpg" alt="Wellness offer graphic" loading="lazy" decoding="async"><figcaption>Offer graphic</figcaption></figure>
-      </div>
-    </div>
-
-    <div class="ind-panel" id="p-retail" role="tabpanel" aria-labelledby="tab-retail" hidden>
-      <div class="gallery">
-        <figure data-lb><img src="assets/opt/weber_feedgrid.jpg" alt="Weber Grill feed evolution" loading="lazy" decoding="async"><figcaption>Feed evolution</figcaption></figure>
-        <figure data-lb><img src="assets/opt/weber_shoot3.jpg" alt="Weber Grill product styling" loading="lazy" decoding="async"><figcaption>Styling</figcaption></figure>
-        <figure data-lb><img src="assets/opt/weber_shoot4.jpg" alt="Weber Grill product direction" loading="lazy" decoding="async"><figcaption>Product direction</figcaption></figure>
-        <figure data-lb><img src="assets/opt/weber_shoot5.jpg" alt="Weber Grill detail shot" loading="lazy" decoding="async"><figcaption>Detail</figcaption></figure>
-        <figure data-lb><img src="assets/opt/weber_shoot1.jpg" alt="Weber Grill on location" loading="lazy" decoding="async"><figcaption>On location</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_caspian.jpg" alt="Candle product photography for a retail brand" loading="lazy" decoding="async"><figcaption>Product</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_lilac.jpg" alt="Packaging and product styling for a retail brand" loading="lazy" decoding="async"><figcaption>Packaging</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_fizzybeez.jpg" alt="Beverage product and dessert campaign content" loading="lazy" decoding="async"><figcaption>Campaign</figcaption></figure>
+        <figure data-lb><img src="assets/busy-bod/reel_busybod_poster.jpg" alt="Busy Bod wellness reel still" loading="lazy" decoding="async"><figcaption>Reel still</figcaption></figure>
+        <figure data-lb><img src="assets/busy-bod/img_4021.jpg" alt="Busy Bod product held in hand" loading="lazy" decoding="async"><figcaption>Product</figcaption></figure>
+        <figure data-lb><img src="assets/busy-bod/img_4023.jpg" alt="Busy Bod product styled in a bag" loading="lazy" decoding="async"><figcaption>Lifestyle</figcaption></figure>
+        <figure data-lb><img src="assets/product/work_caspian.jpg" alt="Candle product photography for a retail brand" loading="lazy" decoding="async"><figcaption>Product</figcaption></figure>
+        <figure data-lb><img src="assets/product/work_lilac.jpg" alt="Packaging and product styling for a retail brand" loading="lazy" decoding="async"><figcaption>Packaging</figcaption></figure>
+        <figure data-lb><img src="assets/food-cocktail/work_fizzybeez.jpg" alt="Beverage product and dessert campaign content" loading="lazy" decoding="async"><figcaption>Campaign</figcaption></figure>
+        <figure data-lb><img src="assets/food-cocktail/food-video.jpg" alt="Vertical food content shown on a phone" loading="lazy" decoding="async"><figcaption>Content mockup</figcaption></figure>
       </div>
     </div>
 
     <div class="ind-panel" id="p-brand" role="tabpanel" aria-labelledby="tab-brand" hidden>
       <div class="gallery">
-        <figure data-lb><img src="assets/opt/story_23.jpg" alt="Website design shown on desktop and mobile" loading="lazy" decoding="async"><figcaption>Website design</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_24.jpg" alt="Brand design system templates" loading="lazy" decoding="async"><figcaption>Design system</figcaption></figure>
-        <figure data-lb><img src="assets/opt/work_phone_mockup.jpg" alt="Vertical food content shown on a phone" loading="lazy" decoding="async"><figcaption>Content mockup</figcaption></figure>
-        <figure data-lb><img src="assets/opt/weber_video.jpg" alt="Video content presented on a phone" loading="lazy" decoding="async"><figcaption>Video format</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_1.jpg" alt="Educational social content design" loading="lazy" decoding="async"><figcaption>Educational</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_22.jpg" alt="Spanish language branded content" loading="lazy" decoding="async"><figcaption>Branding · ES</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_21.jpg" alt="Mother's Day seasonal campaign graphic" loading="lazy" decoding="async"><figcaption>Seasonal</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_20.jpg" alt="Memorial Day seasonal campaign graphic" loading="lazy" decoding="async"><figcaption>Seasonal</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_22.jpg" alt="Brand identity work for an automotive client" loading="lazy" decoding="async"><figcaption>Brand identity</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_23.jpg" alt="Website design shown on desktop and mobile" loading="lazy" decoding="async"><figcaption>Website design</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_24.jpg" alt="Website template system" loading="lazy" decoding="async"><figcaption>Web templates</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_26.jpg" alt="Recent work grid of brand and web projects" loading="lazy" decoding="async"><figcaption>Recent work</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_1.jpg" alt="Educational social content design" loading="lazy" decoding="async"><figcaption>Educational</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_2.jpg" alt="Strategy focused social content design" loading="lazy" decoding="async"><figcaption>Strategy content</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_157.jpg" alt="Spanish language branded social content" loading="lazy" decoding="async"><figcaption>Content &middot; ES</figcaption></figure>
+        <figure data-lb><img src="assets/stories/story_95.jpg" alt="Seasonal monthly campaign graphic" loading="lazy" decoding="async"><figcaption>Seasonal</figcaption></figure>
       </div>
     </div>
   </div>
@@ -555,11 +637,11 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
       </div>
       <div class="team-shots reveal">
         <figure class="ts-lead" data-lb>
-          <img src="assets/opt/team_group.jpg" alt="The Studio T Creative team working together" loading="lazy" decoding="async">
+          <img src="assets/studio-t/team_group.jpg" alt="The Studio T Creative team working together" loading="lazy" decoding="async">
         </figure>
-        <figure data-lb><img src="assets/opt/team_meeting.jpg" alt="Studio T Creative team in a strategy session" loading="lazy" decoding="async"></figure>
-        <figure data-lb><img src="assets/opt/team_duo.jpg" alt="Two Studio T Creative team members with laptops" loading="lazy" decoding="async"></figure>
-        <figure data-lb><img src="assets/opt/team_phones.jpg" alt="Hands holding phones showing branded social content" loading="lazy" decoding="async"></figure>
+        <figure data-lb><img src="assets/studio-t/team_meeting.jpg" alt="Studio T Creative team in a strategy session" loading="lazy" decoding="async"></figure>
+        <figure data-lb><img src="assets/studio-t/team_duo.jpg" alt="Two Studio T Creative team members with laptops" loading="lazy" decoding="async"></figure>
+        <figure data-lb><img src="assets/studio-t/team_phones.jpg" alt="Hands holding phones showing branded social content" loading="lazy" decoding="async"></figure>
       </div>
     </div>
   </div>
@@ -818,6 +900,16 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
   window.addEventListener('scroll', syncSticky, {passive:true});
   window.addEventListener('resize', syncSticky);
   syncSticky();
+
+  /* ---- resource choice: remember which one was picked so /resources can show it ----
+     Navigates in the same tab on purpose. sessionStorage only survives the round trip
+     through the form when the tab is the same one, and a query param is added as a
+     second route in case separate forms are wired up per resource later. ---- */
+  document.querySelectorAll('.rc-btn[data-res]').forEach(function(a){
+    a.addEventListener('click', function(){
+      try { sessionStorage.setItem('stc_resource', a.dataset.res); } catch(e){}
+    });
+  });
 
   /* ---- Calendly: load the widget only when the booking block is near, keeps mobile fast ---- */
   var calBox = document.getElementById('calendly-embed');

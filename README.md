@@ -7,12 +7,17 @@ deployed, edited and measured independently.
 
 ```
 index.html          the entire page, all CSS and JS inline
-assets/opt/         31 files: 26 images and 5 reels
+assets/opt/         55 files: 50 images and 5 reels
 vercel.json         clean URLs and a one year cache on the media
-.gitignore          keeps .DS_Store, zips and client documents out
+.gitignore          only assets/opt ships, everything else stays out
 ```
 
-No build step, no dependencies, no framework. It is static files.
+No build step, no dependencies, no framework. It is static files. Total size is about 17MB.
+
+> **Do not copy the whole `assets/` folder in here.** Only `assets/opt/` belongs in this repo.
+> The raw source folders (`Videos`, `photos`, `poke`, `stories`, `font`) are roughly 380MB of
+> full resolution originals. `.gitignore` is set to ignore everything under `assets/` except
+> `opt`, so a stray copy will not be committed, but it will still bloat your local folder.
 
 ## Deploying to Vercel
 
@@ -50,8 +55,29 @@ To change either destination, find and replace the URL in `index.html`.
 - The `assets/opt/` folder is a copy. The portfolio repo has its own copy of the same media.
   If you re-export an image, update it in both places.
 
+## Page structure
+
+Hero · client strip · five services · results and the before/after feed · proof
+(five reels plus a tabbed gallery) · the studio team · three packages · Calendly
+booking · closing CTA · footer.
+
 ## Media in this folder
 
 Reels: American Mane (3), Busy Bod (2).
-Stills: Poke Company (food), American Mane (medical), Busy Bod (wellness),
-Weber Grill and social templates (retail).
+
+Gallery tabs and what is in each:
+
+| Tab | Count | Content |
+|---|---|---|
+| Food & Hospitality | 18 | Poke Company, restaurant and cafe photography, beverage, bakery |
+| Medical | 5 | American Mane consultation, procedure, clinical detail, results |
+| Wellness | 4 | Busy Bod stills and campaign graphics |
+| Retail & Product | 8 | Weber Grill, candle and packaging product work |
+| Brand & Web | 8 | Website design, design system, content mockups, seasonal, Spanish work |
+
+Team photos are `team_group`, `team_meeting`, `team_duo` and `team_phones`.
+The before/after feed comparison is `feed_evolution_phones.jpg`.
+
+Naming convention: `team_*` studio team, `work_*` client work without a brand prefix,
+`muddy_*` cafe and hospitality, and the rest are prefixed by client (`poke_`, `mane_`,
+`weber_`, `reel_`, `story_`).

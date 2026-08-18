@@ -139,6 +139,14 @@ header.nav{position:sticky;top:0;z-index:80;background:rgba(250,240,227,.94);bac
 .res .n{font-family:'Playfair Display',serif;font-weight:800;font-size:clamp(42px,6.4vw,60px);color:var(--coral);line-height:1;letter-spacing:-.02em}
 .res .l{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;margin-top:12px;color:var(--crema);opacity:.9}
 .res .d{font-size:13px;color:var(--crema);opacity:.62;margin-top:8px;line-height:1.5}
+/* before and after */
+.ba{margin-top:clamp(34px,4vw,54px);display:grid;grid-template-columns:1fr;gap:24px;align-items:center;text-align:left;border-top:1px solid var(--line-d);padding-top:clamp(32px,4vw,50px)}
+@media(min-width:900px){.ba{grid-template-columns:1.05fr .95fr;gap:44px}}
+.ba-copy h3{font-size:clamp(22px,2.6vw,30px);color:var(--crema);margin-top:14px;letter-spacing:-.01em}
+.ba-copy p{font-size:14.5px;color:var(--crema);opacity:.68;margin-top:12px;line-height:1.6;max-width:46ch}
+.ba-img{margin:0 auto;position:relative;border-radius:18px;overflow:hidden;background:rgba(250,240,227,.05);border:1px solid var(--line-d);cursor:zoom-in;max-width:460px;width:100%}
+.ba-img img{width:100%;display:block}
+.ba-img figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 11px;font-size:10.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--crema);background:linear-gradient(transparent,rgba(43,23,16,.85))}
 
 /* ============ PROOF ============ */
 .proof{background:linear-gradient(165deg,#cf9587 0%,var(--mauve) 55%,#b07565 100%);color:var(--crema)}
@@ -172,6 +180,21 @@ header.nav{position:sticky;top:0;z-index:80;background:rgba(250,240,227,.94);bac
 .gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--crema);background:linear-gradient(transparent,rgba(43,23,16,.82));opacity:0;transition:opacity .3s}
 .gallery figure:hover figcaption,.gallery figure:focus-within figcaption{opacity:1}
 @media(hover:none){.gallery figcaption{opacity:1}}
+
+/* ============ TEAM ============ */
+.team{background:var(--card);border-bottom:1px solid var(--line)}
+.team-grid{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,50px);align-items:center}
+@media(min-width:960px){.team-grid{grid-template-columns:.92fr 1.08fr}}
+.team-points{list-style:none;margin:24px 0 0;display:grid;gap:13px}
+.team-points li{position:relative;padding-left:24px;font-size:14px;color:var(--muted);line-height:1.55}
+.team-points li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;border-radius:50%;background:var(--coral)}
+.team-points li b{color:var(--terra);font-weight:700}
+.team-shots{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.team-shots figure{margin:0;border-radius:16px;overflow:hidden;background:var(--card);box-shadow:0 20px 42px -28px rgba(122,53,32,.6);cursor:zoom-in}
+.team-shots figure img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1;transition:transform .5s ease}
+.team-shots figure:hover img{transform:scale(1.04)}
+.team-shots .ts-lead{grid-column:span 3}
+.team-shots .ts-lead img{aspect-ratio:16/10}
 
 /* ============ PACKAGES ============ */
 .packages{background:var(--crema)}
@@ -269,6 +292,7 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
     <nav class="nav-links" aria-label="Primary">
       <a href="#services">Services</a>
       <a href="#work">Work</a>
+      <a href="#team">Studio</a>
       <a href="#packages">Packages</a>
       <a href="#schedule">Book a call</a>
       <a href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce" target="_blank" rel="noopener" class="btn btn-coral">Take Next Step</a>
@@ -318,6 +342,8 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
     <span class="cli">Busy Bod</span>
     <span class="cli">Poke Company</span>
     <span class="cli">Weber Grill</span>
+    <span class="cli">Bavaro's Pizza</span>
+    <span class="cli">Muddy Rose</span>
   </div>
 </div>
 
@@ -396,6 +422,18 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
         <div class="d">Campaigns, calendars and launches planned and shipped.</div>
       </div>
     </div>
+
+    <div class="ba reveal">
+      <div class="ba-copy">
+        <span class="badge badge-coral">See the difference</span>
+        <h3>What a content system does to a feed.</h3>
+        <p>Same brand, same budget, different plan. Consistent art direction, a real calendar and content built around monthly priorities instead of whatever there was time for.</p>
+      </div>
+      <figure class="ba-img">
+        <img data-lb src="assets/opt/feed_evolution_phones.jpg" alt="A client Instagram feed before and after Studio T, shown side by side on two phones" loading="lazy" decoding="async">
+        <figcaption>Client feed, before and after</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -406,7 +444,7 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
       <p class="eyebrow">The proof</p>
       <h2>Real brands. Real production.</h2>
       <div class="rule" style="background:var(--terra)"></div>
-      <p class="sub">Every frame below was shot, designed and edited by Studio T.</p>
+      <p class="sub">Every frame below was shot, designed and edited by Studio T. Pick an industry to see the range.</p>
     </div>
 
     <div class="reel-row">
@@ -439,22 +477,33 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
     <p class="proof-hint">Tap to play · Sound on</p>
 
     <div class="ind-nav" role="tablist" aria-label="Work by industry">
-      <button class="ind-btn" role="tab" id="tab-food" aria-controls="p-food" aria-selected="true" data-p="food">Food</button>
+      <button class="ind-btn" role="tab" id="tab-food" aria-controls="p-food" aria-selected="true" data-p="food">Food &amp; Hospitality</button>
       <button class="ind-btn" role="tab" id="tab-medical" aria-controls="p-medical" aria-selected="false" data-p="medical">Medical</button>
       <button class="ind-btn" role="tab" id="tab-wellness" aria-controls="p-wellness" aria-selected="false" data-p="wellness">Wellness</button>
-      <button class="ind-btn" role="tab" id="tab-retail" aria-controls="p-retail" aria-selected="false" data-p="retail">Retail</button>
+      <button class="ind-btn" role="tab" id="tab-retail" aria-controls="p-retail" aria-selected="false" data-p="retail">Retail &amp; Product</button>
+      <button class="ind-btn" role="tab" id="tab-brand" aria-controls="p-brand" aria-selected="false" data-p="brand">Brand &amp; Web</button>
     </div>
 
     <div class="ind-panel on" id="p-food" role="tabpanel" aria-labelledby="tab-food">
       <div class="gallery">
         <figure data-lb><img src="assets/opt/poke_45.jpg" alt="Poke Company food photography" loading="lazy" decoding="async"><figcaption>Food photography</figcaption></figure>
         <figure data-lb><img src="assets/opt/poke_124.jpg" alt="Poke Company storefront content" loading="lazy" decoding="async"><figcaption>Storefront</figcaption></figure>
+        <figure data-lb><img src="assets/opt/poke_46.jpg" alt="Poke Company campaign carousel cover" loading="lazy" decoding="async"><figcaption>Campaign hook</figcaption></figure>
+        <figure data-lb><img src="assets/opt/poke_54.jpg" alt="Poke Company educational carousel" loading="lazy" decoding="async"><figcaption>Educational</figcaption></figure>
         <figure data-lb><img src="assets/opt/poke_51.jpg" alt="Poke Company editorial carousel" loading="lazy" decoding="async"><figcaption>Carousel design</figcaption></figure>
         <figure data-lb><img src="assets/opt/poke_36.jpg" alt="Poke Company product feature" loading="lazy" decoding="async"><figcaption>Product feature</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_115.jpg" alt="Poke Company behind the counter" loading="lazy" decoding="async"><figcaption>Behind the scenes</figcaption></figure>
         <figure data-lb><img src="assets/opt/poke_41.jpg" alt="Poke Company menu content" loading="lazy" decoding="async"><figcaption>Menu content</figcaption></figure>
-        <figure data-lb><img src="assets/opt/poke_52.jpg" alt="Poke Company educational carousel" loading="lazy" decoding="async"><figcaption>Educational</figcaption></figure>
+        <figure data-lb><img src="assets/opt/poke_115.jpg" alt="Poke Company behind the counter" loading="lazy" decoding="async"><figcaption>Behind the scenes</figcaption></figure>
+        <figure data-lb><img src="assets/opt/poke_52.jpg" alt="Poke Company educational carousel" loading="lazy" decoding="async"><figcaption>Carousel design</figcaption></figure>
         <figure data-lb><img src="assets/opt/poke_53.jpg" alt="Poke Company campaign design" loading="lazy" decoding="async"><figcaption>Campaign</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_tacos.jpg" alt="Overhead taco flatlay food photography" loading="lazy" decoding="async"><figcaption>Flatlay direction</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_food_grid.jpg" alt="Restaurant menu photography grid" loading="lazy" decoding="async"><figcaption>Menu grid</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_food_styling.jpg" alt="Plated food styling for a restaurant menu" loading="lazy" decoding="async"><figcaption>Food styling</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_cocktail.jpg" alt="Cocktail photography on a dark set" loading="lazy" decoding="async"><figcaption>Beverage</figcaption></figure>
+        <figure data-lb><img src="assets/opt/muddy_barista.jpg" alt="Barista pulling espresso, coffee shop brand content" loading="lazy" decoding="async"><figcaption>On location</figcaption></figure>
+        <figure data-lb><img src="assets/opt/muddy_coffee.jpg" alt="Iced coffee cup, coffee shop brand content" loading="lazy" decoding="async"><figcaption>Product</figcaption></figure>
+        <figure data-lb><img src="assets/opt/muddy_pastries.jpg" alt="Pastry photography for a cafe" loading="lazy" decoding="async"><figcaption>Bakery</figcaption></figure>
+        <figure data-lb><img src="assets/opt/muddy_lounge.jpg" alt="Guests in a cafe lounge, hospitality lifestyle content" loading="lazy" decoding="async"><figcaption>Hospitality</figcaption></figure>
       </div>
     </div>
 
@@ -462,6 +511,7 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
       <div class="gallery">
         <figure data-lb><img src="assets/opt/mane_consult.jpg" alt="American Mane patient consultation" loading="lazy" decoding="async"><figcaption>Consultation</figcaption></figure>
         <figure data-lb><img src="assets/opt/mane_surgery.jpg" alt="American Mane procedure documentation" loading="lazy" decoding="async"><figcaption>Procedure</figcaption></figure>
+        <figure data-lb><img src="assets/opt/mane_photo.jpg" alt="American Mane clinical preparation detail" loading="lazy" decoding="async"><figcaption>Clinical detail</figcaption></figure>
         <figure data-lb><img src="assets/opt/mane_grafts.jpg" alt="American Mane results content" loading="lazy" decoding="async"><figcaption>Results</figcaption></figure>
         <figure data-lb><img src="assets/opt/mane_poster.jpg" alt="American Mane video still" loading="lazy" decoding="async"><figcaption>Video still</figcaption></figure>
       </div>
@@ -483,9 +533,52 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
         <figure data-lb><img src="assets/opt/weber_shoot4.jpg" alt="Weber Grill product direction" loading="lazy" decoding="async"><figcaption>Product direction</figcaption></figure>
         <figure data-lb><img src="assets/opt/weber_shoot5.jpg" alt="Weber Grill detail shot" loading="lazy" decoding="async"><figcaption>Detail</figcaption></figure>
         <figure data-lb><img src="assets/opt/weber_shoot1.jpg" alt="Weber Grill on location" loading="lazy" decoding="async"><figcaption>On location</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_24.jpg" alt="Retail design system templates" loading="lazy" decoding="async"><figcaption>Design system</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_caspian.jpg" alt="Candle product photography for a retail brand" loading="lazy" decoding="async"><figcaption>Product</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_lilac.jpg" alt="Packaging and product styling for a retail brand" loading="lazy" decoding="async"><figcaption>Packaging</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_fizzybeez.jpg" alt="Beverage product and dessert campaign content" loading="lazy" decoding="async"><figcaption>Campaign</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="ind-panel" id="p-brand" role="tabpanel" aria-labelledby="tab-brand" hidden>
+      <div class="gallery">
+        <figure data-lb><img src="assets/opt/story_23.jpg" alt="Website design shown on desktop and mobile" loading="lazy" decoding="async"><figcaption>Website design</figcaption></figure>
+        <figure data-lb><img src="assets/opt/story_24.jpg" alt="Brand design system templates" loading="lazy" decoding="async"><figcaption>Design system</figcaption></figure>
+        <figure data-lb><img src="assets/opt/work_phone_mockup.jpg" alt="Vertical food content shown on a phone" loading="lazy" decoding="async"><figcaption>Content mockup</figcaption></figure>
+        <figure data-lb><img src="assets/opt/weber_video.jpg" alt="Video content presented on a phone" loading="lazy" decoding="async"><figcaption>Video format</figcaption></figure>
+        <figure data-lb><img src="assets/opt/story_1.jpg" alt="Educational social content design" loading="lazy" decoding="async"><figcaption>Educational</figcaption></figure>
         <figure data-lb><img src="assets/opt/story_22.jpg" alt="Spanish language branded content" loading="lazy" decoding="async"><figcaption>Branding · ES</figcaption></figure>
-        <figure data-lb><img src="assets/opt/story_1.jpg" alt="Educational social content" loading="lazy" decoding="async"><figcaption>Educational</figcaption></figure>
+        <figure data-lb><img src="assets/opt/story_21.jpg" alt="Mother's Day seasonal campaign graphic" loading="lazy" decoding="async"><figcaption>Seasonal</figcaption></figure>
+        <figure data-lb><img src="assets/opt/story_20.jpg" alt="Memorial Day seasonal campaign graphic" loading="lazy" decoding="async"><figcaption>Seasonal</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAM ============ -->
+<section class="team" id="team">
+  <div class="wrap">
+    <div class="team-grid">
+      <div class="team-copy reveal">
+        <p class="eyebrow">The studio</p>
+        <h2>You are hiring a team, not a freelancer.</h2>
+        <div class="rule"></div>
+        <p class="sub">Studio T Creative is a small in house team in Tampa Bay. Strategy, photo, video, design and reporting all sit under one roof, so nothing gets handed off and lost.</p>
+        <ul class="team-points">
+          <li><b>One team, start to finish.</b> The people who plan your campaign are the people who shoot and edit it.</li>
+          <li><b>Bilingual by default.</b> Every campaign can run in English, Spanish or both, with copy written natively in each.</li>
+          <li><b>Local to Tampa Bay.</b> On site for shoots, in your market, in your time zone.</li>
+        </ul>
+        <div class="hero-actions">
+          <a href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce" target="_blank" rel="noopener" class="btn btn-coral">Take Next Step <span class="arw" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+      <div class="team-shots reveal">
+        <figure class="ts-lead" data-lb>
+          <img src="assets/opt/team_group.jpg" alt="The Studio T Creative team working together" loading="lazy" decoding="async">
+        </figure>
+        <figure data-lb><img src="assets/opt/team_meeting.jpg" alt="Studio T Creative team in a strategy session" loading="lazy" decoding="async"></figure>
+        <figure data-lb><img src="assets/opt/team_duo.jpg" alt="Two Studio T Creative team members with laptops" loading="lazy" decoding="async"></figure>
+        <figure data-lb><img src="assets/opt/team_phones.jpg" alt="Hands holding phones showing branded social content" loading="lazy" decoding="async"></figure>
       </div>
     </div>
   </div>

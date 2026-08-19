@@ -280,6 +280,27 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
 .sticky-cta .btn{flex:1;padding:13px 14px;font-size:13.5px;min-height:46px}
 @media(max-width:860px){.sticky-cta{display:flex}body{padding-bottom:0}}
 
+
+/* ============ RESOURCE MODAL ============ */
+.rm{position:fixed;inset:0;z-index:200;background:rgba(43,23,16,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:18px}
+.rm[hidden]{display:none}
+.rm-box{position:relative;width:100%;max-width:520px;background:var(--crema);border-radius:22px;padding:clamp(26px,4vw,36px);box-shadow:0 40px 90px -30px rgba(0,0,0,.7);max-height:92vh;overflow-y:auto}
+.rm-x{position:absolute;top:12px;right:14px;background:none;border:none;font-size:30px;line-height:1;color:var(--muted);cursor:pointer;padding:6px 10px;font-family:'Playfair Display',serif}
+.rm-x:hover{color:var(--terra)}
+.rm-box h2{font-size:clamp(22px,3.2vw,28px);color:var(--terra);margin-top:8px;letter-spacing:-.015em}
+.rm-desc{font-size:14px;color:var(--terra-ink);margin-top:10px;line-height:1.55}
+.rm-steps{list-style:none;margin:24px 0 0;display:grid;gap:14px;counter-reset:none}
+.rm-step{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px;transition:border-color .2s,opacity .2s}
+.rm-step.done{border-color:var(--mauve);opacity:.62}
+.rm-step.live{border-color:var(--coral)}
+.rm-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--terra);color:var(--crema);display:grid;place-items:center;font-size:12.5px;font-weight:700;font-family:'Playfair Display',serif}
+.rm-step.live .rm-num{background:var(--coral);color:var(--ink)}
+.rm-txt{flex:1;min-width:0}
+.rm-txt b{display:block;font-size:14.5px;color:var(--terra);font-weight:700}
+.rm-txt span{display:block;font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.5}
+.rm-go{margin-top:13px;width:100%;font-size:13.5px;padding:12px 18px;min-height:44px}
+.rm-go.is-locked{opacity:.4;pointer-events:none;background:var(--mauve);color:var(--crema)}
+
 /* ============ LIGHTBOX ============ */
 .lb{position:fixed;inset:0;background:rgba(43,23,16,.95);display:none;align-items:center;justify-content:center;z-index:150;padding:20px;cursor:zoom-out}
 .lb.open{display:flex}
@@ -375,21 +396,21 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
         <span class="rc-tag">Toolkit</span>
         <h3>AI Skill Toolkit</h3>
         <p>Our internal AI setup, packaged. The prompts and workflows we actually use to plan campaigns and produce content faster.</p>
-        <a class="btn btn-coral rc-btn" data-res="toolkit" href="https://studiotcreative.hbportal.co/public/68d2d5473948bd002f7909f1">Send me this <span class="arw" aria-hidden="true">&rarr;</span></a>
+        <button type="button" class="btn btn-coral rc-btn" data-res="toolkit">Send me this <span class="arw" aria-hidden="true">&rarr;</span></button>
       </article>
       <article class="res-card reveal">
         <span class="rc-n">02</span>
         <span class="rc-tag">PDF plan</span>
         <h3>30 Day Content Plan</h3>
         <p>A full month mapped out. What to post, on which day and why, so you never open the app wondering what to say.</p>
-        <a class="btn btn-coral rc-btn" data-res="plan" href="https://studiotcreative.hbportal.co/public/68d2d5473948bd002f7909f1">Send me this <span class="arw" aria-hidden="true">&rarr;</span></a>
+        <button type="button" class="btn btn-coral rc-btn" data-res="plan">Send me this <span class="arw" aria-hidden="true">&rarr;</span></button>
       </article>
       <article class="res-card reveal">
         <span class="rc-n">03</span>
         <span class="rc-tag">PDF pack</span>
         <h3>Image Prompt Pack</h3>
         <p>Ready to paste prompts for on brand product and lifestyle images, with the wording that makes the difference.</p>
-        <a class="btn btn-coral rc-btn" data-res="prompts" href="https://studiotcreative.hbportal.co/public/68d2d5473948bd002f7909f1">Send me this <span class="arw" aria-hidden="true">&rarr;</span></a>
+        <button type="button" class="btn btn-coral rc-btn" data-res="prompts">Send me this <span class="arw" aria-hidden="true">&rarr;</span></button>
       </article>
     </div>
 
@@ -791,6 +812,35 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
   <a href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce" target="_blank" rel="noopener" class="btn btn-coral">Take Next Step</a>
 </div>
 
+
+<div class="rm" id="resModal" role="dialog" aria-modal="true" aria-labelledby="rmTitle" hidden>
+  <div class="rm-box" role="document">
+    <button class="rm-x" id="rmClose" aria-label="Close">&times;</button>
+    <p class="eyebrow">Free resource</p>
+    <h2 id="rmTitle">Resource</h2>
+    <p class="rm-desc" id="rmDesc"></p>
+
+    <ol class="rm-steps">
+      <li class="rm-step" id="rmStep1">
+        <span class="rm-num">1</span>
+        <div class="rm-txt">
+          <b>Add your name and email</b>
+          <span>Takes about ten seconds. Opens in a new tab.</span>
+          <a class="btn btn-coral rm-go" id="rmForm" href="https://studiotcreative.hbportal.co/public/68d2d5473948bd002f7909f1" target="_blank" rel="noopener">Add my details <span class="arw" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+      <li class="rm-step" id="rmStep2">
+        <span class="rm-num">2</span>
+        <div class="rm-txt">
+          <b>Open your resource</b>
+          <span id="rmHint">Unlocks once you have added your details.</span>
+          <a class="btn btn-terra rm-go is-locked" id="rmGet" href="#" target="_blank" rel="noopener" aria-disabled="true">Open the resource <span class="arw" aria-hidden="true">&rarr;</span></a>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>
+
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="x" id="lbClose" aria-label="Close">×</button>
   <button class="nv prev" id="lbPrev" aria-label="Previous image">‹</button>
@@ -901,14 +951,82 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
   window.addEventListener('resize', syncSticky);
   syncSticky();
 
-  /* ---- resource choice: remember which one was picked so /resources can show it ----
-     Navigates in the same tab on purpose. sessionStorage only survives the round trip
-     through the form when the tab is the same one, and a query param is added as a
-     second route in case separate forms are wired up per resource later. ---- */
-  document.querySelectorAll('.rc-btn[data-res]').forEach(function(a){
-    a.addEventListener('click', function(){
-      try { sessionStorage.setItem('stc_resource', a.dataset.res); } catch(e){}
-    });
+  /* ---- resource picker modal ----
+     Two steps: capture the lead in HoneyBook, then hand over the file. The second
+     step unlocks once the form has been opened, so nobody hits a dead end but the
+     form still comes first. The choice is also stored, so if a redirect back to
+     /resources is configured later that page knows which one they wanted. ---- */
+  var RESOURCES = {
+    toolkit: {
+      title: 'AI Skill Toolkit',
+      desc: 'Our internal AI setup, packaged. The prompts and workflows we actually use to plan campaigns and produce content faster.',
+      url: 'https://github.com/studiotcreative/studio-t-ai-toolkit',
+      cta: 'Open the toolkit'
+    },
+    plan: {
+      title: '30 Day Content Plan',
+      desc: 'A full month mapped out. What to post, on which day and why, so you never open the app wondering what to say.',
+      url: 'https://www.studiot-creative.com/_files/ugd/504c98_dfc4133b0acd4e6aa324ffae2d246325.pdf',
+      cta: 'Download the PDF'
+    },
+    prompts: {
+      title: 'Image Prompt Pack',
+      desc: 'Ready to paste prompts for on brand product and lifestyle images, with the wording that makes the difference.',
+      url: 'https://raw.githubusercontent.com/studiotcreative/studio-t-ai-toolkit/main/assets/image-prompts-pack.pdf',
+      cta: 'Download the PDF'
+    }
+  };
+
+  var rm = document.getElementById('resModal');
+  var rmTitle = document.getElementById('rmTitle');
+  var rmDesc = document.getElementById('rmDesc');
+  var rmForm = document.getElementById('rmForm');
+  var rmGet = document.getElementById('rmGet');
+  var rmHint = document.getElementById('rmHint');
+  var rmStep1 = document.getElementById('rmStep1');
+  var rmStep2 = document.getElementById('rmStep2');
+  var lastFocus = null;
+
+  function openModal(key){
+    var r = RESOURCES[key];
+    if(!r) return;
+    lastFocus = document.activeElement;
+    try { sessionStorage.setItem('stc_resource', key); } catch(e){}
+    rmTitle.textContent = r.title;
+    rmDesc.textContent = r.desc;
+    rmGet.href = r.url;
+    rmGet.innerHTML = r.cta + ' <span class="arw" aria-hidden="true">&rarr;</span>';
+    rmGet.classList.add('is-locked');
+    rmGet.setAttribute('aria-disabled','true');
+    rmHint.textContent = 'Unlocks once you have added your details.';
+    rmStep1.classList.add('live'); rmStep1.classList.remove('done');
+    rmStep2.classList.remove('live');
+    rm.hidden = false;
+    document.body.style.overflow = 'hidden';
+    rmForm.focus();
+  }
+  function closeModal(){
+    rm.hidden = true;
+    document.body.style.overflow = '';
+    if(lastFocus) lastFocus.focus();
+  }
+  function unlock(){
+    rmGet.classList.remove('is-locked');
+    rmGet.removeAttribute('aria-disabled');
+    rmHint.textContent = 'Ready. Open it whenever you are.';
+    rmStep1.classList.remove('live'); rmStep1.classList.add('done');
+    rmStep2.classList.add('live');
+    rmGet.focus();
+  }
+
+  document.querySelectorAll('.rc-btn[data-res]').forEach(function(b){
+    b.addEventListener('click', function(){ openModal(b.dataset.res); });
+  });
+  rmForm.addEventListener('click', function(){ setTimeout(unlock, 400); });
+  document.getElementById('rmClose').addEventListener('click', closeModal);
+  rm.addEventListener('click', function(e){ if(e.target === rm) closeModal(); });
+  document.addEventListener('keydown', function(e){
+    if(!rm.hidden && e.key === 'Escape') closeModal();
   });
 
   /* ---- Calendly: load the widget only when the booking block is near, keeps mobile fast ---- */

@@ -1071,5 +1071,25 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
   });
 })();
 </script>
+  <!-- Studio T — Google Ads conversion tracking -->
+<script>
+  gtag('config', 'AW-17704382308');
+
+  // Book a Call: reserva completada en el embed de Calendly
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.event === 'calendly.event_scheduled') {
+      gtag('event', 'conversion', { 'send_to': 'AW-17704382308/MjulCIiExOQcEOTejfpB' });
+    }
+  });
+
+  // Request Proposal: clic en botones de HoneyBook
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('a[href*="hbportal.co"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        gtag('event', 'conversion', { 'send_to': 'AW-17704382308/l05PCIuExOQcEOTejfpB' });
+      });
+    });
+  });
+</script>
 </body>
 </html>

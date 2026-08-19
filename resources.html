@@ -7,6 +7,14 @@
 <meta name="description" content="Your Studio T Creative resource, ready to open.">
 <meta name="theme-color" content="#2b1710">
 <meta name="robots" content="noindex, nofollow">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0J3ZR6CLM6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0J3ZR6CLM6');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,500&family=Montserrat:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -455,6 +463,40 @@ body.unlock{background:var(--ink)}
   }
 
   others.forEach(function(r){ grid.appendChild(card(r, false)); });
+})();
+</script>
+<!-- Studio T · Google Ads conversion tracking + GA4 events -->
+<script>
+(function () {
+  'use strict';
+  var AW = 'AW-17704382308';
+  gtag('config', AW);
+
+  /* Sin embed de Calendly en esta pagina, asi que no hay listener de reservas.
+     Delegado en document porque las tarjetas de recurso se crean por JS. */
+  document.addEventListener('click', function (e) {
+    if (!e.target || !e.target.closest) return;
+
+    /* CONVERSION · Request Proposal, solo el portal de propuesta */
+    var proposal = e.target.closest('a[href*="68a789aac5ac6c002ff015ce"]');
+    if (proposal) {
+      gtag('event', 'conversion', { 'send_to': AW + '/l05PCIuExOQcEOTejfpB' });
+      gtag('event', 'request_proposal', { 'location': 'resources_page' });
+      return;
+    }
+
+    /* EVENTO GA4 · descarga o apertura de un recurso, no es conversion de Ads */
+    var dl = e.target.closest('.pick a[href^="http"], .dl');
+    if (dl) {
+      var name = dl.closest('.pick')
+        ? (document.getElementById('rmTitleX') ? '' : (document.querySelector('.pick h2') || {}).textContent)
+        : (dl.querySelector('h3') || {}).textContent;
+      gtag('event', 'resource_open', {
+        'resource': (name || 'unknown').trim(),
+        'placement': dl.closest('.pick') ? 'primary_pick' : 'secondary'
+      });
+    }
+  });
 })();
 </script>
 </body>

@@ -796,7 +796,7 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
     <p class="sub">Tell us where you are and where you want to be. We will handle the rest.</p>
     <div class="final-actions">
       <a href="https://studiotcreative.hbportal.co/public/68a789aac5ac6c002ff015ce" target="_blank" rel="noopener" class="btn btn-coral">Take Next Step <span class="arw" aria-hidden="true">→</span></a>
-      <a href="https://calendly.com/hello-studiot-creative/15min" target="_blank" rel="noopener" class="btn btn-line-d">Book a 15 min call</a>
+      <a href="#schedule" class="btn btn-line-d">Book a 15 min call</a>
     </div>
   </div>
 </section>
@@ -1071,25 +1071,67 @@ footer{background:var(--ink);color:var(--crema);padding:36px clamp(18px,5vw,56px
   });
 })();
 </script>
-  <!-- Studio T — Google Ads conversion tracking -->
+  <!-- Studio T · Google Ads conversion tracking + GA4 events -->
 <script>
-  gtag('config', 'AW-17704382308');
+(function () {
+  'use strict';
+  var AW = 'AW-17704382308';
+  gtag('config', AW);
 
-  // Book a Call: reserva completada en el embed de Calendly
+  /* ---------- CONVERSION 1 · Book a Call ----------
+     Solo reservas COMPLETADAS en el embed de Calendly.
+     Se valida el origen del mensaje, si no cualquier iframe de terceros
+     podria falsear una conversion con un postMessage. Ver docs de Calendly.
+     Se marca una bandera para no contar dos veces si Calendly reenvia el evento. */
+  var booked = false;
   window.addEventListener('message', function (e) {
-    if (e.data && e.data.event === 'calendly.event_scheduled') {
-      gtag('event', 'conversion', { 'send_to': 'AW-17704382308/MjulCIiExOQcEOTejfpB' });
+    if (e.origin !== 'https://calendly.com') return;
+    if (!e.data || typeof e.data.event !== 'string') return;
+    if (e.data.event !== 'calendly.event_scheduled') return;
+    if (booked) return;
+    booked = true;
+    gtag('event', 'conversion', { 'send_to': AW + '/MjulCIiExOQcEOTejfpB' });
+    gtag('event', 'book_a_call', { 'method': 'calendly_embed' });
+  });
+
+  /* ---------- CONVERSION 2 · Request Proposal ----------
+     Solo el portal de PROPUESTA (68a789...). Excluye a proposito el portal
+     del lead magnet (68d2d5...), que es un opt-in, no una solicitud.
+     Delegado en document: funciona aunque DOMContentLoaded ya haya pasado
+     y cubre cualquier boton que se cree despues por JS. */
+  document.addEventListener('click', function (e) {
+    if (!e.target || !e.target.closest) return;
+
+    var proposal = e.target.closest('a[href*="68a789aac5ac6c002ff015ce"]');
+    if (proposal) {
+      gtag('event', 'conversion', { 'send_to': AW + '/l05PCIuExOQcEOTejfpB' });
+      gtag('event', 'request_proposal', { 'location': proposal.closest('section') ? (proposal.closest('section').id || 'page') : 'page' });
+      return;
+    }
+
+    /* ---------- EVENTOS GA4, NO conversiones de Ads ----------
+       Miden el embudo del lead magnet sin ensuciar la optimizacion de pujas. */
+    var optin = e.target.closest('#rmForm');
+    if (optin) {
+      gtag('event', 'lead_magnet_optin', { 'resource': currentResource() });
+      return;
+    }
+    var open = e.target.closest('#rmGet');
+    if (open) {
+      gtag('event', 'resource_open', { 'resource': currentResource() });
+      return;
+    }
+    var picked = e.target.closest('.rc-btn[data-res]');
+    if (picked) {
+      gtag('event', 'resource_selected', { 'resource': picked.dataset.res });
     }
   });
 
-  // Request Proposal: clic en botones de HoneyBook
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('a[href*="68a789aac5ac6c002ff015ce"]').forEach(function (a) {
-      a.addEventListener('click', function () {
-        gtag('event', 'conversion', { 'send_to': 'AW-17704382308/l05PCIuExOQcEOTejfpB' });
-      });
-    });
-  });
+  function currentResource() {
+    try { return sessionStorage.getItem('stc_resource') || 'unknown'; }
+    catch (err) { return 'unknown'; }
+  }
+})();
 </script>
 </body>
 </html>
